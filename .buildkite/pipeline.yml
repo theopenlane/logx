@@ -1,6 +1,5 @@
 env:
   APP_NAME: ${BUILDKITE_PIPELINE_SLUG}
-  IMAGE_REPO: ghcr.io/theopenlane/${APP_NAME}
   SONAR_HOST: "https://sonarcloud.io"
 steps:
   - group: ":test_tube: Tests"
@@ -10,18 +9,19 @@ steps:
         key: "lint"
         plugins:
           - docker#v5.14.0:
-              image: "golangci/golangci-lint:latest-alpine"
-              cancel_on_build_failing: true
-              command: ["golangci-lint", "run", "-v"]
+              image: "ghcr.io/theopenlane/build-image:latest"
               always-pull: true
+              cancel_on_build_failing: true
+              command: ["task", "go:lint"]
               environment:
                 - "GOTOOLCHAIN=auto"
       - label: ":golang: go test"
         key: "go_test"
         plugins:
           - docker#v5.14.0:
-              image: golang:1.26.6
-              command: ["go", "test", "-coverprofile=coverage.out", "./..."]
+              image: "ghcr.io/theopenlane/build-image:latest"
+              always-pull: true
+              command: ["task", "go:test:cover"]
         artifact_paths: ["coverage.out"]
       - label: ":github: upload PR reports"
         key: "scan-upload-pr"
