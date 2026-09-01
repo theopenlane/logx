@@ -1,0 +1,30 @@
+version: "3"
+
+tasks:
+  go:build:
+    desc: builds the package
+    cmds:
+      - go build ./...
+
+  go:lint:
+    desc: runs golangci-lint
+    cmds:
+      - golangci-lint run --config=.golangci.yaml --verbose
+
+  go:test:
+    desc: runs go tests
+    aliases: ["test"]
+    cmds:
+      - go test ./...
+
+  go:tidy:
+    desc: runs go mod tidy
+    cmds:
+      - go mod tidy
+
+  precommit-full:
+    desc: Lint the project against all files
+    cmds:
+      - pre-commit install && pre-commit install-hooks
+      - pre-commit autoupdate
+      - pre-commit run --show-diff-on-failure --color=always --all-files
