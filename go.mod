@@ -4,7 +4,7 @@ go 1.26.6
 
 require (
 	github.com/fatih/color v1.19.0
-	github.com/labstack/echo/v5 v5.3.1
+	github.com/labstack/echo/v5 v5.4.0
 	github.com/labstack/gommon v0.5.0
 	github.com/rs/zerolog v1.35.1
 	github.com/samber/lo v1.53.0
