@@ -27,4 +27,19 @@ const (
 	FieldForwardedFor = "x_forwarded_for"
 	// FieldRealIP is the log field for the X-Real-IP header
 	FieldRealIP = "x_real_ip"
+	// FieldEventID is the log field for the event envelope identifier
+	FieldEventID = "event_id"
+	// FieldTopic is the log field for the event envelope topic
+	FieldTopic = "topic"
 )
+
+// PerHopFields lists the log field keys every durable dispatch hop stamps fresh from its own
+// envelope and caller, so they must not ride along in a captured context snapshot
+var PerHopFields = []string{
+	FieldEventID,
+	FieldTopic,
+	FieldSubjectID,
+	FieldSubjectEmail,
+	FieldOrganizationID,
+	FieldCapabilities,
+}
