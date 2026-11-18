@@ -10,7 +10,7 @@ require (
 	github.com/samber/lo v1.53.0
 	github.com/stretchr/testify v1.12.1
 	github.com/theopenlane/echox v0.3.0
-	github.com/theopenlane/utils v0.7.3
+	github.com/theopenlane/utils v0.7.4
 )
 
 require (
